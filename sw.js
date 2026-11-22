@@ -1,5 +1,5 @@
 // Offline cache. Bump VERSION whenever any file changes so players get the update.
-const VERSION = 'pg-v1';
+const VERSION = 'pg-v2';
 const FILES = [
   './', 'index.html', 'css/app.css', 'manifest.webmanifest',
   'js/core/common.js', 'js/core/zip.js', 'js/core/queens.js', 'js/core/tango.js', 'js/core/dispatch.js',

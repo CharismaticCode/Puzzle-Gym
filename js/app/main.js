@@ -22,7 +22,7 @@ function renderHome(){
 function renderTabs(active){
   $('tabs').innerHTML=`<button class="tab ${!active?'on':''}" data-g="">Home</button>`+Object.values(GAMES).map(m=>`<button class="tab ${active===m.id?'on':''}" data-g="${m.id}">${m.title}</button>`).join('');
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{location.hash=b.dataset.g});
-  const on=$('tabs').querySelector('.on');if(on)on.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  const tb=$('tabs'),on=tb.querySelector('.on');if(on&&tb.scrollWidth>tb.clientWidth)tb.scrollTo({left:on.offsetLeft-(tb.clientWidth-on.offsetWidth)/2,behavior:'smooth'});
 }
 function seg(el,items,val,onPick){
   el.innerHTML=items.map(([v,l])=>`<button class="seg-btn ${String(v)===String(val)?'on':''}" data-v="${v}" role="radio" aria-checked="${String(v)===String(val)}">${l}</button>`).join('');
