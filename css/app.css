@@ -157,6 +157,22 @@ kbd{font:inherit;font-size:11px;border:1px solid var(--line-2);border-bottom-wid
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* ---------- responsive ---------- */
+.tab-home{display:grid;place-items:center;padding:8px 12px}
+/* phones in portrait: all tabs visible, and the board plus its buttons on one screen */
+@media (max-width:639px){
+  .tabs{gap:2px}
+  .tab{flex:1 0 auto;padding:8px 9px;font-size:13.5px}
+  .tab-home{flex:0 0 auto;padding:8px 11px}
+  /* the active tab already names the game, so the big title is for screen readers only */
+  #game .title-row{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  #game .g-controls{padding-top:4px}
+  .controls{margin-top:8px}
+  .seg-btn{padding:6px 8px}
+  .btn{min-height:42px}
+  .meta{margin:10px 2px 6px}
+  .board-card{padding:6px;border-radius:18px}
+  .actions{margin-top:10px}
+}
 /* small phones */
 @media (max-width:374px){
   .app{padding-left:10px;padding-right:10px}

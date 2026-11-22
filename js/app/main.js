@@ -20,7 +20,7 @@ function renderHome(){
   $('homeStats').textContent=total?`${total} puzzle${total===1?'':'s'} solved so far`:'Pick a game to start';
 }
 function renderTabs(active){
-  $('tabs').innerHTML=`<button class="tab ${!active?'on':''}" data-g="">Home</button>`+Object.values(GAMES).map(m=>`<button class="tab ${active===m.id?'on':''}" data-g="${m.id}">${m.title}</button>`).join('');
+  $('tabs').innerHTML=`<button class="tab tab-home ${!active?'on':''}" data-g="" aria-label="Home"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg></button>`+Object.values(GAMES).map(m=>`<button class="tab ${active===m.id?'on':''}" data-g="${m.id}">${m.title}</button>`).join('');
   document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{location.hash=b.dataset.g});
   const tb=$('tabs'),on=tb.querySelector('.on');if(on&&tb.scrollWidth>tb.clientWidth)tb.scrollTo({left:on.offsetLeft-(tb.clientWidth-on.offsetWidth)/2,behavior:'smooth'});
 }
