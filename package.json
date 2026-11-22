@@ -1,0 +1,11 @@
+{
+  "name": "puzzle-gym",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Logic puzzles with a built-in coach: Dispatch, Zip, Queens and Sun & Moon. Static site, no build step.",
+  "scripts": {
+    "test": "node tests/generators.test.js",
+    "test:quick": "node tests/generators.test.js --quick",
+    "start": "python3 -m http.server 8080"
+  }
+}
