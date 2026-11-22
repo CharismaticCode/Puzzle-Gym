@@ -25,7 +25,7 @@ const Tango=(()=>{
     progress:()=>g.filter(v=>v>=0).length+'/'+P.N*P.N+' cells',
     canUndo:()=>hist.length>0,
     undo(){if(hist.length){g=hist.pop();Sound.play('soft');queueSave();G.render();check()}},
-    reset(){snap();for(let i=0;i<g.length;i++)if(!given[i])g[i]=-1;queueSave();G.render();coach('Cleared. Start with the pairs and the signs.');toast('Board cleared',{label:'Undo',run:()=>M.undo()})},
+    reset(){snap();for(let i=0;i<g.length;i++)if(!given[i])g[i]=-1;queueSave();G.render();coach('Cleared. Start with the pairs and the signs.');return()=>M.undo()},
     hint(){const N=P.N;hints++;const wrong=[];for(let i=0;i<N*N;i++)if(g[i]>=0&&g[i]!==P.solution[i])wrong.push(i);
       if(wrong.length){coach(`This cell is wrong${wrong.length>1?` (and ${wrong.length-1} more)`:''}. <button id="fx">Clear wrong cells</button>`,'bad');$('fx').onclick=()=>{snap();wrong.forEach(i=>g[i]=-1);G.render();coach('Cleared the wrong cells.')};flash([wrong[0]]);return}
       const s=tStep(N,g.slice(),P.edges,4,L);snap();
