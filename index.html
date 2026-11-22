@@ -21,12 +21,12 @@
       <span class="logo" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><rect width="32" height="32" rx="9" fill="#111"/><path d="M9 9h14v5H9v5h14v4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <span class="brand-text"><b>Puzzle Gym</b><small>Train your eye</small></span>
     </button>
+    <nav class="tabs" id="tabs" aria-label="Games"></nav>
     <div class="top-actions">
       <span class="timer" id="timer" hidden aria-label="Timer">0:00</span>
       <button class="icon-btn" id="soundBtn" aria-pressed="true" aria-label="Sound on"></button>
     </div>
   </header>
-  <nav class="tabs" id="tabs" aria-label="Games"></nav>
 
   <main>
     <section id="home" class="view" hidden>
@@ -40,33 +40,41 @@
     </section>
 
     <section id="game" class="view" hidden>
-      <div class="title-row">
-        <h1 id="gTitle">Game</h1>
-        <p class="muted" id="gSub"></p>
+      <div class="game-grid">
+        <div class="g-head title-row">
+          <h1 id="gTitle">Game</h1>
+          <p class="muted" id="gSub"></p>
+        </div>
+        <div class="g-controls">
+          <div class="controls">
+            <div class="seg" id="sizeSeg" role="radiogroup" aria-label="Grid size"></div>
+            <div class="seg" id="diffSeg" role="radiogroup" aria-label="Difficulty"></div>
+          </div>
+          <div class="controls">
+            <button class="btn primary" id="newBtn"><span aria-hidden="true">＋</span> New puzzle</button>
+            <button class="btn" id="dailyBtn">Daily</button>
+          </div>
+        </div>
+        <div class="g-board">
+          <div class="meta"><span id="info"></span><span id="progress"></span></div>
+          <div class="board-card" id="boardWrap">
+            <svg id="board" viewBox="0 0 800 800" role="img" aria-label="Puzzle board"></svg>
+            <div id="overlay" aria-hidden="true"></div>
+          </div>
+          <div class="actions">
+            <button class="btn" id="undoBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>Undo</button>
+            <button class="btn" id="resetBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+            <button class="btn" id="hintBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></svg>Hint</button>
+          </div>
+        </div>
+        <div class="g-side">
+          <div class="chips" id="toggles" aria-label="Helpers"></div>
+          <div id="coach" class="coach" aria-live="polite"></div>
+          <details class="panel" open><summary>Your stats</summary><div class="stats" id="stats"></div></details>
+          <details class="panel"><summary>How to see these faster</summary><div id="tips" class="tips"></div></details>
+          <p class="keys muted">Keyboard: <kbd>H</kbd> hint · <kbd>N</kbd> new · <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo · arrow keys move in Zip</p>
+        </div>
       </div>
-      <div class="controls">
-        <div class="seg" id="sizeSeg" role="radiogroup" aria-label="Grid size"></div>
-        <div class="seg" id="diffSeg" role="radiogroup" aria-label="Difficulty"></div>
-      </div>
-      <div class="controls">
-        <button class="btn primary" id="newBtn"><span aria-hidden="true">＋</span> New puzzle</button>
-        <button class="btn" id="dailyBtn">Daily</button>
-      </div>
-      <div class="meta"><span id="info"></span><span id="progress"></span></div>
-      <div class="board-card" id="boardWrap">
-        <svg id="board" viewBox="0 0 800 800" role="img" aria-label="Puzzle board"></svg>
-        <div id="overlay" aria-hidden="true"></div>
-      </div>
-      <div class="actions">
-        <button class="btn" id="undoBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>Undo</button>
-        <button class="btn" id="resetBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
-        <button class="btn" id="hintBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></svg>Hint</button>
-      </div>
-      <div class="chips" id="toggles" aria-label="Helpers"></div>
-      <div id="coach" class="coach" aria-live="polite"></div>
-      <details class="panel" open><summary>Your stats</summary><div class="stats" id="stats"></div></details>
-      <details class="panel"><summary>How to see these faster</summary><div id="tips" class="tips"></div></details>
-      <p class="keys muted">Keyboard: <kbd>H</kbd> hint · <kbd>N</kbd> new · <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo · arrow keys move in Zip</p>
     </section>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

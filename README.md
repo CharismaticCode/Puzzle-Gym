@@ -19,6 +19,7 @@ Four logic puzzles with a built-in coach. Every puzzle is generated fresh and ch
 - Stats for each game and level: solves, best time without hints, average time
 - Tap sounds made with Web Audio, with a mute button in the top bar
 - Installable as an app and works offline once it has loaded
+- Layouts for every screen: phones (portrait and landscape), tablets, laptops and big desktops. On wide screens the board sits beside the controls and is sized to fit the window
 - Keyboard shortcuts: `H` hint, `N` new puzzle, `Ctrl/Cmd+Z` undo, arrow keys move in Zip
 
 ## Run it locally
@@ -42,6 +43,12 @@ There is also a browser smoke test that clicks through every game, control and h
 pip install playwright && playwright install chromium
 npm start &          # in another terminal
 python3 tests/e2e_smoke.py http://localhost:8080/
+```
+
+There is also a screen-size check that loads the site at phone, tablet and desktop sizes and reports anything that overflows:
+
+```bash
+python3 tests/responsive_check.py http://localhost:8080/
 ```
 
 ## Hosting
