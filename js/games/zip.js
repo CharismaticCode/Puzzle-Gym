@@ -27,7 +27,7 @@ const Zip=(()=>{
     start(p){const T=p.N*p.N;clueAt=new Int32Array(T);maxNum=0;for(const [c,v] of Object.entries(p.clues)){clueAt[+c]=v;if(v>maxNum){maxNum=v;endCell=+c}}
       wallSet=new Set(p.walls);visited=new Uint8Array(T);const s=+Object.keys(p.clues).find(c=>p.clues[c]===1);path=[s];visited[s]=1},
     progress:()=>`${path.length}/${P.N*P.N} cells`,
-    undo(){popTo(path.length-1)},reset(){const saved=path.slice();popTo(1);coach('Reset. Look for the forced cells first.');if(saved.length>1)toast('Path cleared',{label:'Undo',run:()=>{M.setState(saved);queueSave();G.render()}})},canUndo:()=>path.length>1,
+    undo(){popTo(path.length-1)},reset(){const saved=path.slice();popTo(1);coach('Reset. Look for the forced cells first.');return()=>{M.setState(saved);queueSave();G.render()}},canUndo:()=>path.length>1,
     hint(){const sol=P.solution;let k=0;while(k<path.length&&path[k]===sol[k])k++;
       if(k<path.length){hints++;coach(`Wrong turn at step <b>${k+1}</b>. Everything after it is off the solution. <button id="rw">Rewind there</button>`,'bad');$('rw').onclick=()=>{popTo(k);flash([sol[k-1]]);coach('Rewound. The highlighted cell is your last correct one.')};flash([path[k]]);return}
       const nxt=sol[path.length];hints++;const head=path[path.length-1];

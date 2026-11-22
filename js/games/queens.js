@@ -25,7 +25,7 @@ const Queens=(()=>{
     progress:()=>[...st].filter(v=>v===2).length+'/'+P.N+' queens',
     canUndo:()=>hist.length>0,
     undo(){if(hist.length){st=hist.pop();Sound.play('soft');queueSave();G.render();check()}},
-    reset(){snap();st.fill(0);queueSave();G.render();coach('Cleared. Find the tightest region first.');toast('Board cleared',{label:'Undo',run:()=>M.undo()})},
+    reset(){snap();st.fill(0);queueSave();G.render();coach('Cleared. Find the tightest region first.');return()=>M.undo()},
     hint(){const N=P.N;const sol=new Set(P.solution);hints++;
       const wrongQ=[];const wrongX=[];for(let i=0;i<N*N;i++){if(st[i]===2&&!sol.has(i))wrongQ.push(i);if(st[i]===1&&sol.has(i))wrongX.push(i)}
       if(wrongQ.length){coach(`This queen is in the wrong place. <button id="fx">Remove it</button>`,'bad');$('fx').onclick=()=>{snap();st[wrongQ[0]]=0;G.render();coach('Removed.')};flash([wrongQ[0]]);return}

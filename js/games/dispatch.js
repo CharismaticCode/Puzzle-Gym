@@ -27,7 +27,7 @@ const Dispatch=(()=>{
     progress:()=>g.filter(v=>v>=0).length+'/'+P.N*P.N+' slots',
     canUndo:()=>hist.length>0,
     undo(){if(hist.length){g=hist.pop();Sound.play('soft');queueSave();G.render();check()}},
-    reset(){snap();for(let i=0;i<g.length;i++)if(!given[i])g[i]=-1;queueSave();G.render();coach('Cleared. Start with the tightest hour or plant.');toast('Board cleared',{label:'Undo',run:()=>M.undo()})},
+    reset(){snap();for(let i=0;i<g.length;i++)if(!given[i])g[i]=-1;queueSave();G.render();coach('Cleared. Start with the tightest hour or plant.');return()=>M.undo()},
     hint(){const N=P.N;hints++;const wrong=[];for(let i=0;i<N*N;i++)if(g[i]>=0&&g[i]!==P.solution[i])wrong.push(i);
       if(wrong.length){coach(`This slot is wrong${wrong.length>1?` (and ${wrong.length-1} more)`:''}. <button id="fx">Clear wrong slots</button>`,'bad');$('fx').onclick=()=>{snap();wrong.forEach(i=>g[i]=-1);G.render();coach('Cleared.')};flash([wrong[0]]);return}
       const h=dHint(N,PP(),Array.from(g));snap();

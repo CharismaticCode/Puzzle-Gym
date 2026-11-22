@@ -67,7 +67,13 @@ board.addEventListener('pointermove',e=>{if(P&&G)G.move(e)});
 $('newBtn').onclick=()=>newPuzzle(randomSeed());
 $('dailyBtn').onclick=()=>newPuzzle(dailySeed(G.id,curSize,curDiff),'Daily '+dayStr());
 $('undoBtn').onclick=()=>{if(P&&!solved)G.undo()};
-$('resetBtn').onclick=()=>{if(P&&!solved)G.reset()};
+// Reset is a fresh start: clear the board, the timer and the hint count. The toast's Undo brings all three back.
+$('resetBtn').onclick=()=>{if(!P||solved)return;
+  const wasRunning=!!timerId;stopTimer();const prev={elapsed,hints,wasRunning};
+  const undoBoard=G.reset();
+  elapsed=0;hints=0;$('timer').textContent='0:00';queueSave();
+  toast('Board and timer reset',{label:'Undo',run:()=>{if(!P||solved)return;if(undoBoard)undoBoard();elapsed=prev.elapsed;hints=prev.hints;$('timer').textContent=fmt(elapsed);if(prev.wasRunning)startTimer();queueSave()}});
+};
 $('hintBtn').onclick=()=>{if(P&&!solved){Sound.play('hint');G.hint();queueSave()}};
 $('homeBtn').onclick=()=>{location.hash=''};
 function paintSound(){const b=$('soundBtn');b.setAttribute('aria-pressed',Sound.enabled);b.setAttribute('aria-label',Sound.enabled?'Sound on':'Sound off');b.innerHTML=Sound.enabled?
